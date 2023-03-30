@@ -5,6 +5,7 @@
 	overfloor_placed = FALSE
 	underfloor_accessibility = UNDERFLOOR_INTERACTABLE
 	z_flags = Z_ATMOS_IN_DOWN|Z_ATMOS_IN_UP|Z_ATMOS_OUT_DOWN|Z_ATMOS_OUT_UP
+	z_eventually_space = TRUE
 	temperature = TCMB
 	simulated = FALSE
 
@@ -219,16 +220,7 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "invisible"
 	simulated = TRUE
-
-/turf/open/space/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
-	. = ..()
-	overlays += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
-	icon_state = "invisible"
-	return INITIALIZE_HINT_LATELOAD
-
-/turf/open/space/openspace/LateInitialize()
-	. = ..()
-	AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
+	z_flags = Z_MIMIC_BELOW | Z_MIMIC_OVERWRITE | Z_MIMIC_NO_AO
 
 /turf/open/space/openspace/zAirIn()
 	return TRUE
